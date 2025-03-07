@@ -69,7 +69,7 @@ def login(_user, password, type):
         "device_id": "2C8B4939-0CCD-4E94-8CBA-CB8EA6E613A1",
         "device_model": "phone",
         "grant_type": "access_token",
-        "third_name": "huami_phone",
+        "third_name": "email" if "@" in _user else "huami_phone",
         }
     else:
         data2 = {
@@ -110,8 +110,8 @@ def main(_user, _passwd, _step):
     _step = str(_step)
 
     if _step == '':
-        print("已设置为随机步数（10000-29999）")
-        _step = str(random.randint(10000, 29999))
+        print("已设置为随机步数（10000-39999）")
+        _step = str(random.randint(10000, 39999))
 
     login_token, userid = login(_user, _passwd, _type)
 
@@ -333,9 +333,9 @@ def main(_user, _passwd, _step):
 
 # 获取时间戳
 def get_time():
-    url = 'http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp'
+    url = "https://f.m.suning.com/api/ct.do"
     response = requests.get(url, headers=headers).json()
-    t = response['data']['t']
+    t = response["currentTime"]
     return t
 
 
