@@ -1,0 +1,33 @@
+name: 微博签到
+
+on:
+    workflow_dispatch:
+    schedule:
+        - cron: "20 8 * * *"
+    # 如要修改时间请务必在早上之后再执行 否则可能修改失败 因为不可能有人刚起来就几万步吧
+    watch:
+        types: [started]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        if: github.event.repository.owner.id == github.event.sender.id || ! github.event.sender.id || github.actor == 'BlueSkyClouds'
+        timeout-minutes: 3
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: "初始化Python"
+              uses: actions/setup-python@v4
+              with:
+                python-version: '3.9'
+
+            - name: "安装依赖包"
+              run: pip install -r ./requirements.txt
+
+            - name: "运行 微博超话签到"
+              run: python3 function/weibo/weibo.py
+              env:
+                  WEIBO_COOKIE: ${{ secrets.WEIBO_COOKIE }}
+                  PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}
+#最后推送 2021年9月20日
