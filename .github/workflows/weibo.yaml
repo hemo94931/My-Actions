@@ -3,7 +3,7 @@ name: 微博签到
 on:
     workflow_dispatch:
     schedule:
-        - cron: "20 8 * * *"
+        - cron: "20 0 * * *"
     # 如要修改时间请务必在早上之后再执行 否则可能修改失败 因为不可能有人刚起来就几万步吧
     watch:
         types: [started]
