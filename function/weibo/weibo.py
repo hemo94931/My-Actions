@@ -143,8 +143,8 @@ if __name__ == "__main__":
         print("未填写PLUS TOKEN")
         exit(0)
 
-    for url, token in zip(urls, tokens):
-        resultStr = f"超话列表："
+    resultStr = f"超话列表："
+    for url in urls:
         params = extract_params(url)
         # 获取超话列表
         card_type_11_info = get_card_type_11(params, headers)
@@ -167,4 +167,7 @@ if __name__ == "__main__":
 
         print(result_message)
         resultStr += f"\n{super_topic_list}\n{result_message}"
+        resultStr += f"\n{super_topic_list}\n"
+
+    for token in tokens:
         pushplus_bot("微博签到结果:", resultStr, token)
