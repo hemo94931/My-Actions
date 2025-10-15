@@ -163,7 +163,7 @@ if __name__ == "__main__":
             else:
                 status = '失败'
             result_message += f"    {info['title_sub']}超话：{status}\n"
-            time.sleep(random.randint(5, 10))  # 避免请求过于频繁
+            time.sleep(random.randint(1, 3))  # 避免请求过于频繁
 
         print(result_message)
         resultStr += f"\n{super_topic_list}\n{result_message}"
