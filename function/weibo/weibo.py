@@ -156,6 +156,9 @@ if __name__ == "__main__":
         # 依次进行签到
         result_message = "\n签到结果：\n"
         for info in card_type_11_info:
+            if info['title_sub'] != '周深':
+                continue
+            
             result = sign_in(headers, params, info['scheme'])
             # 判断签到结果
             if result and result.get('msg') == '已签到':
