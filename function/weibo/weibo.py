@@ -131,17 +131,8 @@ def pushplus_bot(title: str, content: str, token=None) -> None:
             print("PUSHPLUS 推送失败！")
 
 if __name__ == "__main__":
-    if os.environ.get('WEIBO_COOKIE'):
-        urls = os.environ.get('WEIBO_COOKIE').split("\n")
-    else:
-        print("未填写微博Cookie")
-        exit(0)
-
-    if os.environ.get('PUSH_TOKEN'):
-        tokens = os.environ.get('PUSH_TOKEN').split("\n")
-    else:
-        print("未填写PLUS TOKEN")
-        exit(0)
+    urls = os.environ.get('WEIBO_COOKIE', r'').split("\n")
+    tokens = os.environ.get('PUSH_TOKEN','').split("\n")
 
     resultStr = f"超话列表："
     for url in urls:
